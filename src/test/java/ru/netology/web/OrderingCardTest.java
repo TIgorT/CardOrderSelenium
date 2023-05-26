@@ -40,7 +40,7 @@ public class OrderingCardTest {
 
     @Test
     void orderOfTheCardIsTheTestFirst() {
-        driver.findElements(By.tagName("input")).get(32).sendKeys("Велев Максим");
+        driver.findElements(By.tagName("input")).get(0).sendKeys("Велев Максим");
         driver.findElements(By.tagName("input")).get(1).sendKeys("+79645851953");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
