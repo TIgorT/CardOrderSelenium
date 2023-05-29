@@ -39,6 +39,7 @@ public class OrderingCardTest {
 
 
     @Test
+    // Заполнение всех полей данной формы валидными данными
     void orderOfTheCardIsTheTestFirst() {
         driver.findElements(By.tagName("input")).get(0).sendKeys("Велев Максим");
         driver.findElements(By.tagName("input")).get(1).sendKeys("+79645851953");
@@ -50,6 +51,7 @@ public class OrderingCardTest {
     }
 
     @Test
+        // Заполнение всех полей данной формы валидными данными
     void orderOfTheCardIsTheTestSecond() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -61,6 +63,7 @@ public class OrderingCardTest {
     }
 
     @Test
+        // Добавление в поле "Ф.И." Отчества с использованием пробелов
     void orderOfTheCardIsTheTestThird() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим Владимирович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -72,6 +75,7 @@ public class OrderingCardTest {
     }
 
     @Test
+    // Добавление в поле "Ф.И." Отчества с использованием символа дефис
     void orderOfTheCardIsTheTestFourth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев-Максим-Владимирович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -83,6 +87,7 @@ public class OrderingCardTest {
     }
 
     @Test
+        // Добавление в поле "Ф.И." Отчества с маленькой буквы
     void orderOfTheCardIsTheTestFifth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("велев-максим-владимирович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -94,8 +99,9 @@ public class OrderingCardTest {
     }
 
     @Test
+        // Добавление в поле "Ф.И."  невалидных данных
     void orderOfTheCardIsTheTestSixth() {
-        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Velev Maxim Vladimirovich");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Velev Maxim");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("button")).click();
@@ -105,7 +111,21 @@ public class OrderingCardTest {
     }
 
     @Test
+        // Пусто поле "Ф.И."
     void orderOfTheCardIsTheTestSeventh() {
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String expected = "Поле обязательно для заполнения";
+        String actual = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText();
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    // Добавление в поле "Мобильный телефон"  невалидных данных
+    void orderOfTheCardIsTheTestEighth () {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("7+9645851953");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -114,32 +134,38 @@ public class OrderingCardTest {
         String actual = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText();
         assertEquals(expected, actual);
     }
-
     @Test
-    void orderOfTheCardIsTheTestEighth() {
-        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
-        driver.findElement(By.cssSelector("button")).click();
-        String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
-        String actual = driver.findElement(By.cssSelector("[data-test-id=agreement]")).getText();
-        assertEquals(expected, actual);
-    }
-
-    @Test
+    // Пустое поле "Мобильный телефон"
     void orderOfTheCardIsTheTestNinth() {
-        driver.findElement(By.cssSelector("button")).click();
-        String expected = "Поле обязательно для заполнения";
-        String actual = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void orderOfTheCardIsTheTestTenth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("button")).click();
         String expected = "Поле обязательно для заполнения";
         String actual = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText();
         assertEquals(expected, actual);
     }
+
+    @Test
+    // Заполнение формы валидными данными без использования чекбокса
+    void orderOfTheCardIsTheTestTenth() {
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
+        driver.findElement(By.cssSelector("button")).click();
+        String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
+        String actual = driver.findElement(By.cssSelector("[data-test-id=agreement].input_invalid .checkbox__text")).getText();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    // Пустая форма
+    void orderOfTheCardIsTheTestEleventh() {
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("");
+        driver.findElement(By.cssSelector("button")).click();
+        String expected = "Поле обязательно для заполнения";
+        String actual = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText();
+        assertEquals(expected, actual);
+    }
+
 }
