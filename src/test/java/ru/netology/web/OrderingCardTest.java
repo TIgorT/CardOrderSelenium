@@ -39,7 +39,7 @@ public class OrderingCardTest {
 
 
     @Test
-    // Заполнение всех полей данной формы валидными данными
+        // Заполнение всех полей данной формы валидными значениями
     void orderOfTheCardIsTheTestFirst() {
         driver.findElements(By.tagName("input")).get(0).sendKeys("Велев Максим");
         driver.findElements(By.tagName("input")).get(1).sendKeys("+79645851953");
@@ -51,7 +51,7 @@ public class OrderingCardTest {
     }
 
     @Test
-        // Заполнение всех полей данной формы валидными данными
+        // Заполнение всех полей данной формы валидными значениями
     void orderOfTheCardIsTheTestSecond() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -75,7 +75,7 @@ public class OrderingCardTest {
     }
 
     @Test
-    // Добавление в поле "Ф.И." Отчества с использованием символа дефис
+        // Добавление в поле "Ф.И." Отчества с использованием символа дефис
     void orderOfTheCardIsTheTestFourth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев-Максим-Владимирович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -99,7 +99,7 @@ public class OrderingCardTest {
     }
 
     @Test
-        // Добавление в поле "Ф.И."  невалидных данных
+        // Заполнение поля "Ф.И."  невалидными значениями
     void orderOfTheCardIsTheTestSixth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Velev Maxim");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -124,8 +124,8 @@ public class OrderingCardTest {
 
 
     @Test
-    // Добавление в поле "Мобильный телефон"  невалидных данных
-    void orderOfTheCardIsTheTestEighth () {
+        // Заполнение поля "Мобильный телефон"  невалидными  значениями
+    void orderOfTheCardIsTheTestEighth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("7+9645851953");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -134,8 +134,9 @@ public class OrderingCardTest {
         String actual = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText();
         assertEquals(expected, actual);
     }
+
     @Test
-    // Пустое поле "Мобильный телефон"
+        // Пустое поле "Мобильный телефон"
     void orderOfTheCardIsTheTestNinth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("");
@@ -147,7 +148,7 @@ public class OrderingCardTest {
     }
 
     @Test
-    // Заполнение формы валидными данными без использования чекбокса
+        // Заполнение формы валидными значениями без использования чекбокса
     void orderOfTheCardIsTheTestTenth() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Велев Максим");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79645851953");
@@ -158,7 +159,7 @@ public class OrderingCardTest {
     }
 
     @Test
-    // Пустая форма
+        // Пустая форма
     void orderOfTheCardIsTheTestEleventh() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("");
